@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABC Stock Classifier: Upload SKU, cost and annual usage and download your inventor...</title>
+<meta name="description" content="Upload SKU, unit cost and annual usage and download your inventory classified A, B and C with XYZ variability classes, a Pareto chart, dead stock flags and adjustable thresholds.">
+<meta name="keywords" content="ABC analysis calculator inventory, ABC classification Excel alternative, inventory ABC XYZ analysis tool, Pareto inventory calculator CSV">
+<meta name="author" content="Amir Hussain">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aamirtechs.github.io/abc-stock-classifier/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#0b1f3a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ABC Stock Classifier">
+<meta property="og:description" content="Upload SKU, unit cost and annual usage and download your inventory classified A, B and C with XYZ variability classes, a Pareto chart, dead stock flags and adjustable thresholds.">
+<meta property="og:url" content="https://aamirtechs.github.io/abc-stock-classifier/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ABC Stock Classifier">
+<meta name="twitter:description" content="Upload SKU, unit cost and annual usage and download your inventory classified A, B and C with XYZ variability classes, a Pareto chart, dead stock flags and adjustable thresholds.">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "ABC Stock Classifier", "applicationCategory": "BusinessApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@type": "Person", "name": "Amir Hussain", "url": "https://aamirtechs.com"}, "url": "https://aamirtechs.github.io/abc-stock-classifier/", "description": "Upload SKU, unit cost and annual usage and download your inventory classified A, B and C with XYZ variability classes, a Pareto chart, dead stock flags and adjustable thresholds."}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0b1f3a;--navy2:#122c50;--gold:#d4a72c;--ink:#16233a;--muted:#5a6a84;--line:#e3e9f2;--bg:#f6f8fb;--card:#ffffff}
+*{box-sizing:border-box}body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:44px 20px 34px;text-align:center}
+header h1{font-family:'Sora',sans-serif;font-size:2rem;margin:0 0 10px}header h1 span{color:var(--gold)}
+header p{max-width:720px;margin:0 auto 16px;color:#dbe4f2}
+.stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.stats span{border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:5px 14px;font-size:.85rem}
+main{max-width:980px;margin:-18px auto 0;padding:0 16px 30px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 8px 30px rgba(11,31,58,.08)}
+label{display:block;font-weight:700;font-size:.9rem;margin:14px 0 6px}
+textarea,input[type=text],input[type=number],select{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff}
+textarea{min-height:150px;font-family:ui-monospace,Menlo,monospace;font-size:.85rem}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.btn-run{background:var(--gold);color:var(--navy);border:0;border-radius:9px;padding:12px 22px;font-weight:800;cursor:pointer;font-size:1rem;margin-top:16px}
+.btn-sub{background:var(--navy);color:#fff;border:0;border-radius:9px;padding:10px 16px;font-weight:700;cursor:pointer;margin:8px 8px 0 0}
+.btn-ghost{background:#fff;color:var(--navy);border:1px solid var(--navy);border-radius:9px;padding:9px 15px;font-weight:700;cursor:pointer;margin:8px 8px 0 0}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.87rem}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--navy);color:#fff}
+.flag{color:#b3261e;font-weight:700}.ok{color:#137333;font-weight:700}
+pre{background:#0b1f3a;color:#e8eef8;border-radius:10px;padding:14px;overflow:auto;font-size:.82rem;white-space:pre-wrap;word-break:break-word}
+.privacy{color:var(--muted);font-size:.9rem;margin-top:14px}
+section.how{max-width:980px;margin:22px auto;padding:0 16px}
+section.how h2{font-family:'Sora',sans-serif}
+footer{background:var(--navy);color:#dbe4f2;text-align:center;padding:24px 16px;margin-top:30px;font-size:.92rem}
+footer a{color:var(--gold)}
+.small{font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <h1>ABC Stock Classifier</h1>
+  <p>Upload SKU, cost and annual usage and download your inventory classified A, B and C with a Pareto chart.</p>
+  <div class="stats"><span>Free</span><span>100% in your browser</span><span>No sign-up</span></div>
+</header>
+<main>
+  <div class="card">
+    <label for="fileInput">Upload an inventory CSV (SKU, unit cost, annual quantity, optional monthly columns)</label>
+    <input type="file" id="fileInput" accept=".csv,text/csv,text/plain">
+    <label for="csvInput">Or paste CSV here</label>
+    <textarea id="csvInput">sku,unit_cost,annual_qty,jan,feb,mar
+SKU-100,120,600,50,52,49
+SKU-200,45,900,74,76,75
+SKU-300,18,400,30,36,33
+SKU-400,60,60,2,9,1
+SKU-500,9,150,12,13,12
+SKU-600,30,0,0,0,0</textarea>
+    <div class="row">
+      <div><label for="aThresh">A threshold (cumulative %)</label><input type="number" id="aThresh" value="80" min="1" max="100"></div>
+      <div><label for="bThresh">B threshold (cumulative %)</label><input type="number" id="bThresh" value="95" min="1" max="100"></div>
+    </div>
+    <button class="btn-run" id="runBtn">Classify inventory</button>
+    <div id="summary" class="small" style="margin-top:12px"></div>
+    <canvas id="chart" width="860" height="280" style="max-width:100%;margin-top:14px"></canvas>
+    <div id="results"></div>
+    <button class="btn-sub" id="dlBtn" type="button" style="display:none">Download classified CSV</button>
+
+    <p class="privacy">Runs 100% in your browser. Your files never leave this device.</p>
+  </div>
+</main>
+<section class="how">
+  <h2>How it works</h2>
+  <ul>
+      <li>CSV input: SKU, unit cost and annual quantity, with optional monthly quantity columns for XYZ variability.</li>
+      <li>Adjustable A and B cumulative thresholds, defaulting to 80 and 95 percent of annual value.</li>
+      <li>Pareto chart plus a class summary, with dead stock (zero movement) and high value flags.</li>
+      <li>Combined ABC-XYZ class per SKU and a classified CSV export sorted by annual value, ready to drive reorder priority.</li>
+  </ul>
+</section>
+<footer>
+  <p>Built by Amir Hussain, operations manager and founder of <a href="https://aamirtechs.com" target="_blank" rel="noopener">AamirTechs: operations, customer support and e-commerce services</a>.</p>
+  <p><a href="https://github.com/aamirtechs" target="_blank" rel="noopener">More open source tools on GitHub</a></p>
+</footer>
+<script src="src/logic.js"></script>
+<script>
+
+var L = window.AbcStockClassifier;
+var lastClassified = null;
+function run() {
+  var out = L.classifyCSV(document.getElementById("csvInput").value, {
+    aThreshold: Number(document.getElementById("aThresh").value) || 80,
+    bThreshold: Number(document.getElementById("bThresh").value) || 95
+  });
+  lastClassified = out;
+  var summary = L.summarizeClasses(out);
+  document.getElementById("summary").textContent = out.items.length + " SKUs, total annual value " + out.totalValue + ". A: " + summary.A.count + " SKUs (" + summary.A.valueSharePercent + "% of value). B: " + summary.B.count + " (" + summary.B.valueSharePercent + "%). C: " + summary.C.count + " (" + summary.C.valueSharePercent + "%).";
+  var html = "<table><tr><th>SKU</th><th>Unit cost</th><th>Annual qty</th><th>Annual value</th><th>Cumulative %</th><th>Class</th><th>XYZ</th><th>Combined</th><th>Flags</th></tr>";
+  out.items.forEach(function (it) {
+    html += "<tr><td>" + String(it.sku).replace(/</g, "&lt;") + "</td><td>" + it.unitCost + "</td><td>" + it.annualQty + "</td><td>" + it.annualValue + "</td><td>" + it.cumulativePercent + "</td><td><strong>" + it.abc + "</strong></td><td>" + (it.xyz || "-") + "</td><td>" + it.combined + "</td><td>" + (it.flags.length ? '<span class="flag">' + it.flags.join(", ") + "</span>" : "") + "</td></tr>";
+  });
+  html += "</table>";
+  document.getElementById("results").innerHTML = html;
+  document.getElementById("dlBtn").style.display = out.items.length ? "inline-block" : "none";
+  drawPareto(out);
+}
+function drawPareto(out) {
+  var canvas = document.getElementById("chart");
+  var ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  var data = L.paretoData(out);
+  if (!data.length) { return; }
+  var maxVal = Math.max.apply(null, data.map(function (d) { return d.annualValue; })) || 1;
+  var baseY = 230, topY = 30;
+  var barW = Math.min(70, (canvas.width - 120) / data.length - 10);
+  data.forEach(function (d, i) {
+    var x = 60 + i * (barW + 10);
+    var h = (d.annualValue / maxVal) * (baseY - topY);
+    ctx.fillStyle = d.abc === "A" ? "#122c50" : (d.abc === "B" ? "#5a6a84" : "#c9d4e6");
+    ctx.fillRect(x, baseY - h, barW, h);
+    ctx.fillStyle = "#16233a"; ctx.font = "11px sans-serif";
+    ctx.fillText(String(d.sku).slice(0, 10), x, baseY + 16);
+  });
+  ctx.strokeStyle = "#d4a72c"; ctx.lineWidth = 2; ctx.beginPath();
+  data.forEach(function (d, i) {
+    var x = 60 + i * (barW + 10) + barW / 2;
+    var y = baseY - (d.cumulativePercent / 100) * (baseY - topY);
+    if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); }
+  });
+  ctx.stroke();
+  ctx.fillStyle = "#5a6a84"; ctx.font = "12px sans-serif";
+  ctx.fillText("Pareto: bars are annual value, gold line is cumulative % of value", 60, 18);
+}
+document.getElementById("runBtn").addEventListener("click", run);
+document.getElementById("fileInput").addEventListener("change", function (e) {
+  var f = e.target.files[0]; if (!f) { return; }
+  var reader = new FileReader();
+  reader.onload = function () { document.getElementById("csvInput").value = String(reader.result); run(); };
+  reader.readAsText(f);
+});
+document.getElementById("dlBtn").addEventListener("click", function () {
+  var blob = new Blob([L.buildClassifiedCSV(lastClassified)], { type: "text/csv" });
+  var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "abc-classified.csv"; a.click(); URL.revokeObjectURL(a.href);
+});
+run();
+
+</script>
+</body>
+</html>
